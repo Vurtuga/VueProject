@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    
+</head>
+<body>
+     <!-- Notes : 
+        - use v-once attribute to make one time data binding
+        - use v-bind to inistid of mustache brackets in attributes
+        - bind Atrributes can be dunamic example: v-bind[attrName]="Value"
+        - v-on Atrributes can be dunamic example: v-on[attrName]="Value"
+        - dynamic attributes should written in small case becase it will be converted to small case any way when calculated to be html
+        - Modifieres added to dircetives to modify the basic execution of an event like :
+            <form v-on:submit.prevent="onSubmit"> ... </form> ".prevent" modifier will call event.preventDefault() and stop the click event on this btn 
+        - using Methods in getters when we dont need cashing and we have a lot of computations in calculating result
+
+    -->
+    <div id="app">
+        <h1> {{message}} {{fullName}}</h1>
+        <p v-bind:title="titlemessage">Hover your mouse over me for a few secondsn to see my dynamically bound title!</p>
+        <p v-html="htmlText"></p>
+        <button v-on:click="toggelMsg">{{BtnMsg}}</button>
+        <span v-if="seen">Now you see me</span>
+        <input v-model="updatedMsg"/>
+        <button v-on:click="addNewItem(updatedMsg)">Add New</button>
+        <ol>
+            <todo-item v-for="item in todos" v-bind:todo="item" ></todo-item>
+        </ol>
+        <button v-on:click="closeApp">Close App</button>
+    </div>
+    <script src="./Components/todo-item/todo-item-component.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
