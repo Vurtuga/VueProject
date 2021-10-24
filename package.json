@@ -1,5 +1,8 @@
 {
     "name": "vueproject",
     "version": "1.0.0",
-    "description": "Vue Project"
+    "description": "Vue Project",
+    "dependencies": {
+        "vue": "^2.6.14"
+    }
 }

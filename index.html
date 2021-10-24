@@ -22,15 +22,31 @@
     -->
     <div id="app">
         <h1> {{message}} {{fullName}}</h1>
+        <span class="static" v-bind:class="[{ active: isActive },errorClass]">{{isActive}}</span>
+        <p v-bind:class="classObject">Class Object : {{classObject}}</p>
+        <p v-bind:style="styleObject">Test Inline Style</p>
         <p v-bind:title="titlemessage">Hover your mouse over me for a few secondsn to see my dynamically bound title!</p>
         <p v-html="htmlText"></p>
         <button v-on:click="toggelMsg">{{BtnMsg}}</button>
         <span v-if="seen">Now you see me</span>
-        <input v-model="updatedMsg"/>
-        <button v-on:click="addNewItem(updatedMsg)">Add New</button>
-        <ol>
-            <todo-item v-for="item in todos" v-bind:todo="item" ></todo-item>
-        </ol>
+        <span v-else>you not see me</span>
+        <br/>
+        <span v-show="seen">-- Show Now you see me --</span>
+        <br/>
+        <button v-on:click="ListBtnClicked">{{listBtnTitle}}</button>
+        <template v-if="showList">
+            <br/>
+            <input v-model="updatedMsg"/>
+            <button v-on:click="updateList(0,updatedMsg)">Add New</button>
+            <button v-on:click="updateList(1)">Remove Item</button>
+            <ol>
+                <todo-item v-for="item in todos" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+            </ol>
+        </template>
+        <br/>
+        <li v-for="(value, name, index) in object">
+            {{ index }} - {{ name }} : {{ value }}
+        </li>
         <button v-on:click="closeApp">Close App</button>
     </div>
     <script src="./Components/todo-item/todo-item-component.js"></script>

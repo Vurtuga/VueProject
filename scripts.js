@@ -4,6 +4,11 @@ var app = new Vue({
         firstName : 'Mohamed',
         lastName : 'Khalifa',
         message: 'Hello',
+        error: false,
+        listBtnTitle: 'Hide List',
+        showList: true,
+        errorClass: 'class-error',
+        isActive: true,
         BtnMsg: 'Show Msg',
         htmlText:'<span style="color:red;">This Should Be Red</span>',
         updatedMsg:'',
@@ -13,9 +18,28 @@ var app = new Vue({
             { id:1 , text: 'Learn JavaScript' },
             { id:2 , text: 'Learn Vue' },
             { id:3 , text: 'Build something awesome' }
-          ]
+          ],
+        object: {
+            title: 'How to do lists in Vue',
+            author: 'Jane Doe',
+            publishedAt: '2016-04-10'
+        }
     },
     computed:{
+        classObject: function() {
+            return{ 
+                active : this.isActive && !this.error,
+                'text-danger': this.error
+            }
+        },
+
+        styleObject: function(){
+            return{ 
+                color: this.isActive ? "green" : "red",
+                'font-size': 30 +'px'
+            }
+         },
+
         fullName:{
            get:function(){
                 return this.firstName + ' ' + this.lastName;
@@ -41,12 +65,20 @@ var app = new Vue({
     errorCaptured: function(){ debugger;}, */
     //----------------------------
     methods: {
-        addNewItem:function(msg){
-            app.todos.push({ text: msg })
+        updateList:function(operation,msg){
+            if(operation == 0){
+                app.todos.push({ text: msg });
+            }else if(operation == 1){
+                app.todos.pop();
+            }
         },
         toggelMsg:function(){
             app.seen = !app.seen;
             app.BtnMsg = app.seen ? 'Hide Msg' : 'Show Msg';
+        },
+        ListBtnClicked:function(){
+            app.showList = !app.showList;
+            app.listBtnTitle = app.seen ? 'Hide List' : 'Show List';
         },
         closeApp:function(){
             app.$destroy();
